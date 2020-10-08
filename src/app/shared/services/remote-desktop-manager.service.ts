@@ -307,7 +307,6 @@ export class RemoteDesktopManager {
    * @param state State received from the client
    */
   private handleClientStateChange(state: number): void {
-    console.log('handleClientStateChange', state);
     switch (state) {
       // Idle
       case 0:

@@ -14,14 +14,33 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+## Installation
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. [guacamole/guacd](https://hub.docker.com/r/guacamole/guacd). Docker image is a better way for adding it to a developing environment
 
-## Running end-to-end tests
+1.1 [Install Docker](https://www.docker.com/get-started)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+1.2 Pull guacd image `docker pull guacamole/guacd`
 
-## Further help
+1.3 Running guacd `docker run --name some-guacd -d -p 4822:4822 guacamole/guacd`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+2. web-sockets⇄guacd proxy - [guacamole-test-server](https://github.com/jamhall/guacamole-test-server)
+
+2.1 [Download guacamole-test-server](https://github.com/jamhall/guacamole-test-server)
+
+2.2 Download and install [Maven](http://maven.apache.org/download.cgi)
+
+2.3 Download and install [JDK](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html)
+
+2.4 Run `mvn package`
+
+2.5 Run `java -jar target/gts.jar --guacd-host n.n.n.n --guacd-port 4822 --port 8080`
+    n.n.n.n is ip address of your guacamole/guacd, probably it will be an ip address of your local network interface e.g. 192.168.1.55
+
+3. I had second computer with windows 7 in my local network. I used it as rdp server.
+
+4. Edit src\app\shared\component\remote-desktop\remote-desktop.component.ts with right parameters of ip address: see line 26
+
+5. Run `npm install`
+
+6. Run `npm run start`

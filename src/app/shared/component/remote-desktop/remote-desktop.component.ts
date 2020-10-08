@@ -6,6 +6,7 @@ import { RemoteDesktopManager } from '@shared/services/remote-desktop-manager.se
 import { ClipboardManager } from '@shared/services/clipboard-manager.service';
 import * as screenfull from 'screenfull';
 import * as FileSaver from 'file-saver';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-remote-desktop',
@@ -43,7 +44,8 @@ export class RemoteDesktopComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   constructor(private element: ElementRef, 
-              private clipboardManager: ClipboardManager) { }
+              private clipboardManager: ClipboardManager,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     
@@ -81,7 +83,6 @@ export class RemoteDesktopComponent implements OnInit, OnDestroy, AfterViewInit 
   handleConnect(e: MouseEvent): void {
     e.preventDefault();
     e.stopPropagation();
-    // if 
     this.connect();
   }
 
@@ -139,11 +140,13 @@ export class RemoteDesktopComponent implements OnInit, OnDestroy, AfterViewInit 
       case RemoteDesktopManager.STATE.CONNECTED:
         this.setState(this.states.CONNECTED);
         this.isConnected = true;
+        this.toastr.success('Connected');
         break;
       case RemoteDesktopManager.STATE.DISCONNECTED:
         this.exitFullScreen();
         this.setState(this.states.DISCONNECTED);
         this.isConnected = false;
+        this.toastr.info('Disconnected');
         break;
       case RemoteDesktopManager.STATE.IDLE:
         this.setState(this.states.IDLE);

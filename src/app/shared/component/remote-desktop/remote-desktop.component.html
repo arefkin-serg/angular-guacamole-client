@@ -25,7 +25,7 @@
     [ngClass]="{'remote-desktop__container_fullscreen': isFullscreen}">
 
     <div class="remote-desktop__info-block" *ngIf="(state | async) !== states.CONNECTED">
-      <h2>Connecting through a <a href="https://github.com/jamhall/guacamole-test-server">guacamole-test-server</a></h2>
+      <h2>Connection through a <a href="https://github.com/jamhall/guacamole-test-server">guacamole-test-server</a></h2>
       <p><strong>Connection parameters:</strong></p>
       <p>{{ connectionParams }}</p>
       <button (click)="handleConnect($event)" class="remote-desktop__btn"

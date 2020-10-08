@@ -1,6 +1,32 @@
 <div class="container">
   <h1>Angular Guacamole Client</h1>
-  <p>Some description here</p>
+  <p><strong>Environment:</strong></p>
+  <ol>
+    <li><a href="https://hub.docker.com/r/guacamole/guacd">guacamole/guacd</a>. Docker image is a better way for adding it to a developing environment
+      <ul>
+        <li><a href="https://www.docker.com/get-started">Install Docker</a></li>
+        <li>Pull guacd image: <i>docker pull guacamole/guacd</i></li>
+        <li>Running guacd: <i>docker run --name some-guacd -d -p 4822:4822 guacamole/guacd</i></li>
+      </ul>
+    </li>
+    <li>web-sockets&#8644;guacd proxy - <a href="https://github.com/jamhall/guacamole-test-server">guacamole-test-server</a>
+      <ul>
+        <li><a href="https://github.com/jamhall/guacamole-test-server">Download guacamole-test-server</a></li>
+        <li>Download and install <a href="http://maven.apache.org/download.cgi">Maven</a></li>
+        <li>Download and install <a href="https://www.oracle.com/java/technologies/javase-jdk15-downloads.html">JDK</a></li>
+        <li>Run: <i>mvn package</i></li>
+        <li>Run: 
+          <i>java -jar target/gts.jar --guacd-host 1.2.3.4 --guacd-port 4822 --port 8080</i>
+          <p>1.2.3.4 is ip address of your guacamole/guacd, probably it will be an ip address of your local network interface e.g. 192.168.1.55</p>
+        </li>
+      </ul>
+    </li>
+    <li>I had second computer with windows 7 in my local network. I used it as rdp server.
+      <p>Edit src\app\shared\component\remote-desktop\remote-desktop.component.ts with right parameters of ip address: line 26</p>
+    </li>
+    <li>Run <i>npm install</i></li>
+    <li>Run <i>npm run start</i></li>
+  </ol>
   <app-remote-desktop [host]="host"></app-remote-desktop>
   <p>Demo Input</p>
   <input type="text">
