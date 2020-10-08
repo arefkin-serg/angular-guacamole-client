@@ -20,7 +20,6 @@ export class RemoteDesktopDisplayComponent implements OnInit, OnDestroy, AfterVi
   public alive$: Subject<void> = new Subject();
   public isFocused: boolean;
 
-  @Output() onMouseMove = new BehaviorSubject(null);
   @Input()  manager: RemoteDesktopManager;
   @ViewChild('display') display: ElementRef;
   
@@ -164,7 +163,6 @@ export class RemoteDesktopDisplayComponent implements OnInit, OnDestroy, AfterVi
       mouseState.up,
       mouseState.down);
     this.manager.getClient().sendMouseState(scaledState);
-    this.onMouseMove.next(mouseState);
   }
 
   private resetKeyboard(): void {

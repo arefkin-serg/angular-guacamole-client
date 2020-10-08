@@ -4,6 +4,32 @@
 }
 
 .remote-desktop {
+  position: relative;
+
+  &__control-panel {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    max-width: 100px;
+    transition: max-width .2s .3s ease-in-out;
+
+    &_rolled-up {
+      max-width: 8px;
+
+      &:hover {
+        max-width: 100px;
+        transition: max-width .2s ease-in-out;
+      }
+    }
+
+    &_hidden {
+      max-width: 0;
+      pointer-events: none;
+    }
+  }
+
   &__container {
     background-color: #f8f8f8;
     padding: 3px;
@@ -13,4 +39,64 @@
     }
   }
 
+  &__info-block {
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__btn {
+    font-size: 30px;
+    border-radius: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
+    overflow: hidden;
+
+    &_loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  }
+}
+
+.control-panel {
+  list-style-type: none;
+  margin: 0;
+  padding: 5px 0;
+  border-radius: 20px 0 0 20px;
+  overflow: hidden;
+  background-color: rgba(255,255,255,.85);
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+  }
+
+  &__btn {
+    outline: 0;
+    width: 100%;
+    text-align: left;
+    font-size: 10px;
+    border: 0;
+    background-color: rgba(130, 230, 230, 0);
+    padding: 5px 7px 5px 12px;
+    cursor: pointer;
+    transition: background-color .25s ease, color .25s ease;
+    white-space: nowrap;
+
+    &:hover,
+    &:hover:active,
+    &:hover:focus {
+      background-color: rgba(130, 230, 230, .5);
+    }
+
+    &_disabled {
+      color: #cfcfcf;
+      pointer-events: none;
+    }
+  }
 }

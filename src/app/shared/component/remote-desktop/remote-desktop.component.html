@@ -1,11 +1,38 @@
 <main class="remote-desktop" #container>
+  <aside class="remote-desktop__control-panel" 
+    [ngClass]="{'remote-desktop__control-panel_rolled-up': isControlPanelHidden,
+                'remote-desktop__control-panel_hidden': !isConnected}">
+    <ul class="control-panel">
+      <li class="control-panel__item">
+        <button (click)="handleConnect($event)" class="control-panel__btn" 
+          [ngClass]="{'control-panel__btn_disabled': (state | async) === states.CONNECTING}">{{ isConnected ? 'Disconnect' : 'Connect' }}</button>
+      </li>
+      <li class="control-panel__item">
+        <button (click)="handleTakeScreenshot($event)" class="control-panel__btn"
+          [ngClass]="{'control-panel__btn_disabled': !isConnected}">Take screenshot</button>
+      </li>
+      <li class="control-panel__item">
+        <button (click)="handleToggleFullscreen($event)" class="control-panel__btn"
+          [ngClass]="{'control-panel__btn_disabled': !isConnected}">{{ isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen' }}</button>
+      </li>
+      <li class="control-panel__item">
+        <button (click)="handleHideControlPanel($event)" class="control-panel__btn">{{ !isControlPanelHidden ? 'Unpin' : 'Pinned' }}</button>
+      </li>
+    </ul>
+  </aside>
   <section class="remote-desktop__container" 
     [ngStyle]="{minHeight: componentMinHeight}"
     [ngClass]="{'remote-desktop__container_fullscreen': isFullscreen}">
+
+    <div class="remote-desktop__info-block" *ngIf="(state | async) !== states.CONNECTED">
+      <h2>Connecting through a <a href="https://github.com/jamhall/guacamole-test-server">guacamole-test-server</a></h2>
+      <p><strong>Connection parameters:</strong></p>
+      <p>{{ connectionParams }}</p>
+      <button (click)="handleConnect($event)" class="remote-desktop__btn"
+        [ngClass]="{'remote-desktop__btn_loading': (state | async) === states.CONNECTING}">Connect</button>
+    </div>
     <app-remote-desktop-display *ngIf="(state | async) === states.CONNECTED"
-      [manager]="manager"
-      (onMouseMove)="handleDisplayMouseMove($event)">
+      [manager]="manager">
     </app-remote-desktop-display>
   </section>
 </main>
-<button (click)="handleEnterFullScreen()">Fullscreen</button>
