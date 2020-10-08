@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  width: 100%;
+
+  ::hg-deep {
+    div {
+      transform-origin: center;
+    }
+  }
+}
+
+.display {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  opacity: 0.5;
+  transition: opacity .2s ease, box-shadow .2s ease-in-out;
+
+  &_focused {
+    box-shadow: 0 0 0 3px #F2C94C;
+    opacity: 1;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  &__proportion-saver {
+    display: block;
+    width: 0;
+    flex: none;
+    opacity: 0;
+  }
+}

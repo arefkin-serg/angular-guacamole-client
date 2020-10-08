@@ -1,0 +1,11 @@
+<main class="remote-desktop" #container>
+  <section class="remote-desktop__container" 
+    [ngStyle]="{minHeight: componentMinHeight}"
+    [ngClass]="{'remote-desktop__container_fullscreen': isFullscreen}">
+    <app-remote-desktop-display *ngIf="(state | async) === states.CONNECTED"
+      [manager]="manager"
+      (onMouseMove)="handleDisplayMouseMove($event)">
+    </app-remote-desktop-display>
+  </section>
+</main>
+<button (click)="handleEnterFullScreen()">Fullscreen</button>
